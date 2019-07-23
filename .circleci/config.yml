@@ -12,8 +12,8 @@ jobs:
       - checkout
     
       - run:
-        name: "Setup environment variable"
-        command: |
+          name: "Setup environment variable"
+          command: |
           mkdir DerivedData
           echo 'export DERIVED_DATA_PATH="DerivedData"' >> $BASH_ENV
 
