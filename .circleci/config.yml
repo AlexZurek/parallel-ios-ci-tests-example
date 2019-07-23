@@ -2,7 +2,7 @@
 version: 2
 jobs:
 
-  build_for_testing:
+  test_build:
     macos:
       xcode: "10.2.1"
 
@@ -111,12 +111,12 @@ workflows:
 
   build_and_test:
     jobs:
-      - build_for_testing 
+      - test_build 
       
       - test_ios_11:
           requires:
-            - build_for_testing
+            - test_build
 
       - test_ios_12:
           requires:
-            - build_for_testing
+            - test_build
