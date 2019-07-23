@@ -1,6 +1,6 @@
 //
 //  Hello_WorldTests.swift
-//  Hello_WorldTests
+//  Hello WorldTests
 //
 //  Created by Alex Zurek on 7/23/19.
 //  Copyright © 2019 Alex Zurek. All rights reserved.
@@ -11,24 +11,25 @@ import XCTest
 
 class Hello_WorldTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testExample1() {
+        XCTAssert(2 + 2 == 4)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testExample2() {
+        XCTAssert("foo" != "bar")
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testExample3() {
+        XCTAssert(2 / 2 == 1)
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testExample4() {
+        XCTAssert("foo" == "foo")
+    }
+
+    func testExample5() {
+        let theAnswerToLifeTheUniverseAndEverything = 15 + 27
+        XCTAssert(theAnswerToLifeTheUniverseAndEverything == 42)
     }
 
 }
