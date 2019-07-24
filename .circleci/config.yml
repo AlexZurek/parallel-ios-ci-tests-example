@@ -1,7 +1,8 @@
-
 version: 2
 jobs:
 
+  # Build the app for testing and persist the build sources
+  # to a shared workspace for other jobs to access
   test_build:
     macos:
       xcode: "10.2.1"
@@ -17,13 +18,8 @@ jobs:
             mkdir DerivedData
             echo 'export DERIVED_DATA_PATH="DerivedData"' >> $BASH_ENV
 
-      - run:
-          name: Bundle Install
-          command: bundle install
-
-      - run:
-          name: Build For Testing
-          command: bundle exec rake build_for_testing
+      - run: bundle install
+      - run: bundle exec rake build_for_testing
       
       - run:
           name: Copy Derived Data Folder
@@ -60,16 +56,8 @@ jobs:
           name: Move build artifacts
           command: cp -r /tmp/workspace/ DerivedData/
 
-      - run:
-          name: Bundle Install
-          command: bundle install
-
-      - run:
-          name: Run Unit Tests
-          command: bundle exec rake unit_tests
-      
-      - store_test_results:
-          path: build/reports
+      - run: bundle install
+      - run: bundle exec rake unit_tests
 
 
   test_ios_12:
@@ -95,16 +83,9 @@ jobs:
           name: Move build artifacts
           command: cp -r /tmp/workspace/ DerivedData/
 
-      - run:
-          name: Bundle Install
-          command: bundle install
+      - run: bundle install
+      - run: bundle exec rake unit_tests
 
-      - run:
-          name: Run Unit Tests
-          command: bundle exec rake unit_tests
-      
-      - store_test_results:
-          path: build/reports
 
 workflows:
   version: 2
