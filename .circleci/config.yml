@@ -1,44 +1,6 @@
 version: 2
 jobs:
 
-  # Build the app for testing and persist the build sources
-  # to a shared workspace for other jobs to access
-  test_build:
-    macos:
-      xcode: "10.2.1"
-
-    shell: "/bin/bash --login -eo pipefail"
-
-    steps:
-      - checkout
-    
-      - run:
-          name: Setup New DerivedData Folder
-          command: mkdir DerivedData
-
-      - run: bundle install
-
-      - run: 
-          name: Build For Testing
-          command: |
-            xcodebuild build-for-testing \
-            -scheme Hello_World \
-            -sdk iphonesimulator \
-            -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
-            -derivedDataPath DerivedData
-      
-      # - run:
-      #     name: Copy Derived Data Folder
-      #     command: |
-      #       mkdir -p /tmp/workspace
-      #       cp -r DerivedData/ /tmp/workspace/
-
-      - persist_to_workspace:
-          root: DerivedData/
-          paths:
-            - "**/*"
-
-
   test_ios_11:
     macos:
       xcode: "10.2.1"
@@ -48,23 +10,13 @@ jobs:
     steps:
       - checkout
 
-      - attach_workspace:
-          at: /tmp/workspace
-
-      - run:
-          name: Setup new DerivedData folder
-          command: |
-              mkdir DerivedData
-              cp -r /tmp/workspace/ DerivedData/
-
       - run: 
           name: Run Unit Tests
           command: |
-            xcodebuild test-without-building \
+            xcodebuild test \
             -scheme Hello_World \
             -sdk iphonesimulator \
-            -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
-            -derivedDataPath DerivedData
+            -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7"
 
   test_ios_12:
     macos:
@@ -75,35 +27,18 @@ jobs:
     steps:
       - checkout
 
-      - attach_workspace:
-          at: /tmp/workspace
-
-      - run:
-          name: Setup new DerivedData folder
-          command: |
-              mkdir DerivedData
-              cp -r /tmp/workspace/ DerivedData/
-
       - run: 
           name: Run Unit Tests
           command: |
-            xcodebuild test-without-building \
+            xcodebuild test \
             -scheme Hello_World \
             -sdk iphonesimulator \
-            -destination "platform=IOS Simulator,OS=12.2,name=iPhone 7" \
-            -derivedDataPath DerivedData 
+            -destination "platform=IOS Simulator,OS=12.2,name=iPhone 7"
 
 workflows:
   version: 2
 
-  build_and_test:
+  test:
     jobs:
-      - test_build 
-      
-      - test_ios_11:
-          requires:
-            - test_build
-
-      - test_ios_12:
-          requires:
-            - test_build
+      - test_ios_11
+      - test_ios_12
