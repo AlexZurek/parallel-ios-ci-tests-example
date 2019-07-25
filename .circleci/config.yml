@@ -1,7 +1,7 @@
 version: 2
 jobs:
 
-  test_ios_11_and_12:
+  build:
     macos:
       xcode: "10.2.1"
 
