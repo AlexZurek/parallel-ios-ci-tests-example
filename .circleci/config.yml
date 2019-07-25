@@ -21,10 +21,10 @@ jobs:
       - run: 
           name: Build For Testing
           command: xcodebuild build-for-testing \
-            -scheme Hello_World \
-            -sdk iphonesimulator \
-            -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
-            -derivedDataPath DerivedData
+          -scheme Hello_World \
+          -sdk iphonesimulator \
+          -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
+          -derivedDataPath DerivedData
       
       # - run:
       #     name: Copy Derived Data Folder
@@ -59,10 +59,10 @@ jobs:
       - run: 
           name: Run Unit Tests
           command: xcodebuild test-without-building \
-            -scheme Hello_World \
-            -sdk iphonesimulator \
-            -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
-            -derivedDataPath DerivedData
+          -scheme Hello_World \
+          -sdk iphonesimulator \
+          -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
+          -derivedDataPath DerivedData
 
   test_ios_12:
     macos:
@@ -85,10 +85,10 @@ jobs:
       - run: 
           name: Run Unit Tests
           command: xcodebuild test-without-building \
-            -scheme Hello_World \
-            -sdk iphonesimulator \
-            -destination "platform=IOS Simulator,OS=12.2,name=iPhone 7" \
-            -derivedDataPath DerivedData
+          -scheme Hello_World \
+          -sdk iphonesimulator \
+          -destination "platform=IOS Simulator,OS=12.2,name=iPhone 7" \
+          -derivedDataPath DerivedData
 
 workflows:
   version: 2
