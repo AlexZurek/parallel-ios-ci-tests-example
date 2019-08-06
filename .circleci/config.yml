@@ -1,8 +1,6 @@
 version: 2
 jobs:
 
-  # Build the app for testing and persist the build sources
-  # to a shared workspace for other jobs to access
   test_build:
     macos:
       xcode: "10.2.1"
@@ -26,12 +24,6 @@ jobs:
             -sdk iphonesimulator \
             -destination "platform=IOS Simulator,OS=11.4,name=iPhone 7" \
             -derivedDataPath DerivedData
-      
-      # - run:
-      #     name: Copy Derived Data Folder
-      #     command: |
-      #       mkdir -p /tmp/workspace
-      #       cp -r DerivedData/ /tmp/workspace/
 
       - persist_to_workspace:
           root: DerivedData/
